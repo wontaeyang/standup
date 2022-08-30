@@ -18,17 +18,17 @@ func main() {
 	names := parseNames(n)
 	ends := parseNames(e)
 
-	if len(names) == 0 {
-		fmt.Printf("Nobody is coming to this standup :(\n")
-		return
-	}
-
-	// randomize
+	// randomize names
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(names), func(i, j int) { names[i], names[j] = names[j], names[i] })
 
+	// merge all the names
 	all := append(starts, names...)
 	all = append(all, ends...)
+	if len(all) == 0 {
+		fmt.Printf("Nobody is coming to this standup :(\n")
+		return
+	}
 
 	// print names
 	fmt.Printf("Today is a workday:\n")
